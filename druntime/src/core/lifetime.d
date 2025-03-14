@@ -2186,6 +2186,14 @@ private enum bool hasContextPointers(T) = {
     static assert(!hasContextPointers!U);
 }
 
+/*
+    undocumented
+
+    attributes inferred!
+    rationale: <https://github.com/dlang/phobos/pull/6848#issuecomment-2723160090>
+*/
+void _moveEmplaceImpl(T)(scope ref T target, return scope ref T source) => moveEmplaceImpl!T(target, source);
+
 // target must be first-parameter, because in void-functions DMD + dip1000 allows it to take the place of a return-scope
 private void moveEmplaceImpl(T)(scope ref T target, return scope ref T source)
 {
